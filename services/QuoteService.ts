@@ -1,16 +1,16 @@
-import { Quote } from "../models/quotemodel.ts";
-import { IQuote } from "../interfaces/quote.ts";
+import { QuoteModel } from "../models/QuoteModel.ts";
+import { Quote } from "../interfaces/Quote.ts";
 import { readJSON } from "../utils/jsonhelper.ts";
 
 class QuoteService {
-    quotes: Array<IQuote> = [];
+    quotes: Array<Quote> = [];
     constructor() {
         this.loadData();
     }
 
     loadData = () => {
         const quoteJSON = readJSON("./data/quotes.json");
-        const quotes = Quote.fromJSON(quoteJSON);
+        const quotes = QuoteModel.fromJSON(quoteJSON);
         
         this.quotes = Object.values(quotes);
     };
@@ -24,14 +24,14 @@ class QuoteService {
     this.quotes.find(((quote) => quote.id === id));  
     
     
-    createQuote = (quote: IQuote) => {
+    createQuote = (quote: Quote) => {
     const newQuote = Object.values(quote);
     const [first] = newQuote;
     this.quotes.push(first);
             
     };
 
-    updateQuote = (quote: IQuote, id: string) => {
+    updateQuote = (quote: Quote, id: string) => {
         const updatedQuote: {
         id: string;
         quote: string;

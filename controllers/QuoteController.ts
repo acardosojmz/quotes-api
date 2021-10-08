@@ -1,4 +1,4 @@
-import quoteService  from "../services/quoteservice.ts";
+import quoteService  from "../services/QuoteService.ts";
 
 import { Status } from "../dependences.ts";
 
@@ -34,6 +34,7 @@ export const getQuote = (
 export const addQuote = async (
     {request, response}: { request: any; response: any },
 ) => {
+
     if (!request.body()) {
         response.status = Status.BadRequest;
         response.body = {
@@ -44,10 +45,8 @@ export const addQuote = async (
     }
 
     const data = await request.body().value;
+    const quote = quoteService.createQuote( data );
 
-    const quote = quoteService.createQuote(
-        data,
-    );
     response.status = Status.OK;
     response.body = {
         success: true,
@@ -109,7 +108,7 @@ export const deleteQuote = (
     );
     response.body = {
         success: true,
-        message: "Advertisement removed",
+        message: "Quote removed",
         data: quote,
     };
 };

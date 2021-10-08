@@ -1,4 +1,4 @@
-export interface IQuote {
+export interface Quote {
   id: string;
   quote: string;
   author: string;
