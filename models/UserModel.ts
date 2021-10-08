@@ -8,8 +8,6 @@ import { connector }
       
 const db = new Database(connector);  
 
-
-
 class UserModel extends Model { 
     static table = "user"; 
     static fields = { 
