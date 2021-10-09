@@ -13,7 +13,7 @@ const  payload = (name:string) => {
 
     const payloader:jwtPayload = {
         //--- Identifica el objeto o usuario en nombre del cual fue emitido el JWT
-        sub: 'cardoso',
+        sub: 'cardoso.developer',
         //--- Identifica la audiencia o receptores para lo que el JWT fue emitido, normalmente el/los servidor/es de recursos (e.g. la API protegida)
         aud: 'api-quotes',
         //--- expiración del token (One hour from now)

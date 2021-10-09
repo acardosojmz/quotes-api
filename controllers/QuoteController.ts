@@ -35,22 +35,22 @@ export const addQuote = async (
     {request, response}: { request: any; response: any },
 ) => {
 
-    if (!request.body()) {
-        response.status = Status.BadRequest;
+    if (request.body()){
+        const data = await request.body().value;
+        const quote = quoteService.createQuote( data );
+
+        response.status = Status.OK;
         response.body = {
-            success: false,
-            message: "The request must have a body",
+            success: true,
+            data: quote,
         };
         return;
     }
 
-    const data = await request.body().value;
-    const quote = quoteService.createQuote( data );
-
-    response.status = Status.OK;
+    response.status = Status.BadRequest;
     response.body = {
-        success: true,
-        data: quote,
+        success: false,
+        message: "The request must have a body",
     };
 };
 
@@ -67,34 +67,33 @@ export const updateQuote = async (
         params.id,
     );
 
-    if (!quote) {
-        response.status = Status.NotFound;
-        response.body = {
-            success: false,
-            message: `Quote with id: ${params.id} not found`,
-        };
-        return;
-    }
+    if (quote){
+        const data = await request.body().value;
+        const updatedQuote = quoteService.updateQuote(
+            data,
+            params.id,
+        );
 
-    const data = await request.body().value;
-    const updatedQuote = quoteService.updateQuote(
-        data,
-        params.id,
-    );
+        if (updatedQuote) {
+            response.status = Status.OK;
+            response.body = {
+                success: true,
+                message: `Update for quote with id ${params.id} was successful`,
+            };
+            return;
+        }
 
-    if (updatedQuote) {
-        response.status = Status.OK;
+        response.status = Status.InternalServerError;
         response.body = {
             success: true,
-            message: `Update for quote with id ${params.id} was successful`,
+            message: `Update for quote with id ${params.id} failed`,
         };
-        return;
+        return; 
     }
-
-    response.status = Status.InternalServerError;
+    response.status = Status.NotFound;
     response.body = {
-        success: true,
-        message: `Update for quote with id ${params.id} failed`,
+        success: false,
+        message: `Quote with id: ${params.id} not found`,
     };
 };
 
