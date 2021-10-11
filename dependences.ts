@@ -28,8 +28,13 @@ import { config }
 import { Sha512 as shaEncryption } 
     from "https://deno.land/std/hash/sha512.ts";
 
-import { DataTypes, Database, Model, MySQLConnector,  } 
-    from "https://deno.land/x/denodb/mod.ts";
+import { 
+    DataTypes, 
+    Database, 
+    Model, 
+    MySQLConnector, 
+    MongoDBConnector
+   }  from "https://deno.land/x/denodb/mod.ts";
 
 export const { JWT_SECRET } = config({ safe: true });
 
@@ -43,4 +48,10 @@ export type {jwtHeader, jwtPayload };
 
 export { shaEncryption };
 
-export { DataTypes, Database, Model, MySQLConnector }; 
+export { 
+    DataTypes, 
+    Database,
+    Model, 
+    MySQLConnector, 
+    MongoDBConnector 
+}; 

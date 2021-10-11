@@ -4,7 +4,7 @@ import { UserModel } from "../models/UserModel.ts";
 class UserRepository { 
 
     async getUsers() { 
-        return await UserModel.get();
+        return await UserModel.select("id","account").all();
     }
     
     async getUser(id:number) { 

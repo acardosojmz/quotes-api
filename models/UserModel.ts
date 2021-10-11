@@ -1,16 +1,19 @@
 import { DataTypes, Database, Model } 
     from "../dependences.ts";
 
-import { connector } 
-    from "../config/configdb.ts";    
+import { connectorMariaDB } 
+    from "../config/connectors.ts";    
 
 
       
-const db = new Database(connector);  
+const mariaDB = new Database(connectorMariaDB);  
 
 class UserModel extends Model { 
     static table = "user"; 
     static fields = { 
+        _id: {
+            primaryKey: true,
+        }, 
         id: { 
             type: DataTypes.INTEGER, 
             primaryKey: true, autoIncrement: true, 
@@ -34,9 +37,7 @@ class UserModel extends Model {
 
 };
 
-db.link([UserModel]); 
-
-
+mariaDB.link([UserModel]); 
 
 export { UserModel }; 
 

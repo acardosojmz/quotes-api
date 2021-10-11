@@ -1,42 +1,43 @@
-import { Quote } from "../interfaces/Quote.ts";
+import { DataTypes, Database, Model } 
+    from "../dependences.ts";
 
-class QuoteModel implements Quote {
-  id: string;
-  quote: string;
-  author: string;
-
-  constructor({id, quote, author}: {
-                    id: string,
-                    quote: string,
-                    author: string
-                }
-            ) {
-  
-        this.id = id;
-        this.quote = quote;
-        this.author = author;
-  }
-
-    toJSON(): Quote {
-        return Object.assign({}, this);
-    }
+import { connectorMongoDB } 
+    from "../config/connectors.ts";    
     
-    static fromJSON(json: Quote | string): QuoteModel {
-       if (typeof json === "string") {
-                return JSON.parse(json, QuoteModel.reviver);
-       }
-       let quote = Object.create(QuoteModel.prototype);
-       return Object.assign(quote, json);
-    }
-    
-    static reviver(key: string, value: any): any {
-        return key === "" ? QuoteModel.fromJSON(value) : value;
-    }
+const mongoDB =  new Database(connectorMongoDB);  
 
-}
+class QuoteModel extends Model { 
+    static table = "quote"; 
+    static fields = { 
+        _id: {
+            primaryKey: true,
+          },
 
-export { QuoteModel };
+        id: { 
+            type: DataTypes.INTEGER, 
+            unique: true,
+        }, 
 
+        quote: { 
+            type: DataTypes.STRING,
+            length: 200,
+            allowNull: false,
+        },
+        author: {
+            type: DataTypes.STRING,
+            length: 100,
+            allowNull: false,
+        }
+    };
+    //--- ! indica no-null 
+    _id!: string;
+    id!: number; 
+    quote!: string; 
+    author!: string; 
 
+};
 
+mongoDB.link([QuoteModel]); 
+
+export { QuoteModel }; 
 

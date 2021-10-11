@@ -1,10 +1,10 @@
 import { Router } from "../dependences.ts";
 import {
-  addQuote,
-  deleteQuote,
-  getQuote,
-  getQuotes,
-  updateQuote,
+    getQuotes,
+    getQuote, 
+    addQuote,
+    updateQuote,
+    deleteQuote,
 } from "../controllers/QuoteController.ts";
 
 import { authMiddleware } from "../middleware/auth.ts";
@@ -12,8 +12,9 @@ import { authMiddleware } from "../middleware/auth.ts";
 const router = new Router();
 
 router.get("/api/v1/quotes", getQuotes)
-  .get("/api/v1/quotes/:id", authMiddleware, getQuote)
-  .post("/api/v1/quotes", authMiddleware, addQuote)
+  //.get("/api/v1/quotes/id", authMiddleware, getQuote)
+  .get("/api/v1/quotes/:id", getQuote )
+  .post("/api/v1/quotes",  addQuote)
   .put("/api/v1/quotes/:id", updateQuote)
   .delete("/api/v1/quotes/:id", deleteQuote);
 

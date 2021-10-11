@@ -1,45 +1,46 @@
 import { User } from "../interfaces/User.ts";
-import { default as UserRepository } 
+import { default as userRepository  } 
     from "../repositories/UserRepository.ts";
 
 import { shaEncrypt } from "../utils/encodehelper.ts";
 
 
 class UserService {
-    users = UserRepository;
-   
+
     isLoginUser = async (account: string, password: string)=>{
         password = shaEncrypt(password);    
-        return this.users.isLogin(account, password);
+        return userRepository.isLogin(account, password);
+        
     }
     
-    fetchUsers = () => {
-        return this.users;
+    fetchUsers = async () =>  {
+        return  await userRepository.getUsers();
     };
 
       
-    fetchUser = (id: number) =>
-        this.users.getUser(id);
+    fetchUser = async (id: number) =>{
+        return await userRepository.getUser(id);
+    }
+        
     
     
-    createUser = (user: User) => {
-        this.users.addUser(user)
-            
+    createUser = async (user: User) => {
+        return await userRepository.addUser(user)  
     };
 
-    updateUser = (user: User, id: number) => {
+    updateUser = async (user: User, id: number) => {
             const updatedUser: {
-            id: string;
+            id: number;
             account: string;
             password: string;
         } = user;
         
-        return this.users.updateUser(id,user);
+        return await userRepository.updateUser(id,user);
     };
 
-    deleteUser = (id: number) => {
-        return this.users.deleteUser(id);
-      };
+    deleteUser = async (id: number) => {
+        return  await userRepository.deleteUser(id);
+    };
 }
 
 export default new UserService();

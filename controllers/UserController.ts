@@ -12,7 +12,16 @@ import {
 } from "../middleware/jwt/jwt.ts";
 
 
-// @desc    Add  quote
+// @desc    Fetch all users
+// @route   GET /api/v1/users
+export const getUsers = async ({response}: { response: any }) => {
+    response.body =  {
+        data: await userService.fetchUsers()
+    };
+};
+
+
+// @desc    Authenticate user
 // @route   POST /api/v1/users/login
 export const loginUser = async (
     {request, response}: { request: any; response: any },
@@ -50,3 +59,4 @@ export const loginUser = async (
         message: "The request must have a body",
     };
 };
+

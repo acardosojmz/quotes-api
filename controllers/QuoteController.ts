@@ -1,22 +1,23 @@
+
 import quoteService  from "../services/QuoteService.ts";
 
 import { Status } from "../dependences.ts";
 
-// @desc    Fetch all quotes
+// @desc    get all quotes
 // @route   GET /api/v1/quotes
-export const getQuotes = ({response}: { response: any }) => {
+export const getQuotes = async ({response}: { response: any }) => {
     response.body = {
-        data: quoteService.fetchQuotes(),
+        data: await quoteService.getQuotes(),
     };
 };
 
-// @desc    Fetch single quote
+// @desc    get single quote by id
 // @route   GET /api/v1/quote/:id
-export const getQuote = (
+export const getQuote = async (
     {params, response}: { params: { id: string }; response: any },
 ) => {
-    const quote = quoteService.fetchQuote(
-        params.id,
+    const quote = await quoteService.getQuote(
+        Number(params.id),
     );
 
     if (quote === null) {
@@ -29,6 +30,7 @@ export const getQuote = (
     response.body = {data: quote};
 };
 
+
 // @desc    Add  quote
 // @route   POST /api/v1/quotes
 export const addQuote = async (
@@ -37,7 +39,7 @@ export const addQuote = async (
 
     if (request.body()){
         const data = await request.body().value;
-        const quote = quoteService.createQuote( data );
+        const quote = await quoteService.createQuote( data );
 
         response.status = Status.OK;
         response.body = {
@@ -63,15 +65,15 @@ export const updateQuote = async (
         response: any;
     },
 ) => {
-    const quote = quoteService.fetchQuote(
-        params.id,
+    const quote = await quoteService.getQuote(
+        Number(params.id),
     );
 
     if (quote){
         const data = await request.body().value;
-        const updatedQuote = quoteService.updateQuote(
+        const updatedQuote = await quoteService.updateQuote(
             data,
-            params.id,
+            Number(params.id),
         );
 
         if (updatedQuote) {
@@ -103,7 +105,7 @@ export const deleteQuote = (
     {params, response}: { params: { id: string }; response: any },
 ) => {
     const quote = quoteService.deleteQuote(
-        params.id,
+        Number(params.id),
     );
     response.body = {
         success: true,
