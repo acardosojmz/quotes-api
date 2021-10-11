@@ -9,7 +9,7 @@ class UserService {
 
     isLoginUser = async (account: string, password: string)=>{
         password = shaEncrypt(password);    
-        return userRepository.isLogin(account, password);
+        return await userRepository.isLogin(account, password);
         
     }
     

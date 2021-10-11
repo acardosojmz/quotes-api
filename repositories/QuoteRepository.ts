@@ -19,7 +19,7 @@ class QuoteRepository {
         return await QuoteModel.where(fields).get()
     }
 
-    async getUserSort(fields: any) { 
+    async getQuoteSort(fields: any) { 
         return await QuoteModel.orderBy(fields).all(); 
     }
 
@@ -46,10 +46,10 @@ class QuoteRepository {
         return quoteUpdated;
     }
 
-    async deleteQuote(id: number) {
-        let findQuote = await this.getQuote(id); 
-       // await findQuote.delete(); 
-
+    async deleteQuote(id: number) {    
+        let quote= await this.getQuote(id) ;
+        await QuoteModel.where("id", id ).delete();
+        return quote;
     }
 
 } 

@@ -4,36 +4,30 @@ import { Quote } from "../interfaces/Quote.ts";
 
 class QuoteService {
 
-    getQuotes = () => {
-        return  quoteRepository.getQuotes();
+    getQuotes =  async() => {
+        return await quoteRepository.getQuotes();
     };
 
       
-    getQuoteByoid =  (oid: string) =>{
-       return quoteRepository.getQuoteByoid(oid);
+    getQuoteByoid = async (oid: string) =>{
+       return await quoteRepository.getQuoteByoid(oid);
     }
     
-    getQuote = (id: number) => {
-        return quoteRepository.getQuote(id);
+    getQuote = async (id: number) => {
+        return await quoteRepository.getQuote(id);
     }
     
-    createQuote = (quote: Quote) => {
-        return quoteRepository.addQuote(quote);
+    createQuote = async (quote: Quote) => {
+        return await quoteRepository.addQuote(quote);
             
     };
 
-    updateQuote = (quote: Quote, id: number) => {
-        const updatedQuote: {
-            id: number;
-            quote: string;
-            author: string;
-        } = quote;
-        
-        return  quoteRepository.updateQuote(id,updatedQuote);
+    updateQuote = async (id: number, quote: Quote, ) => {
+        return  await quoteRepository.updateQuote(id,quote);
     };
 
-    deleteQuote = (id: number) => {
-        return quoteRepository.deleteQuote(id);
+    deleteQuote = async (id: number) => {
+        return await quoteRepository.deleteQuote(id);
     };
 }
 
