@@ -10,8 +10,12 @@ import { Status } from "../dependences.ts";
  */
 
 export const getQuotes = async ({response}: { response: any }) => {
+    const quotes= await quoteService.getQuotes();
+    response.status = Status.OK;
     response.body = {
-        data: await quoteService.getQuotes(),
+        success: true,
+        message: "Retrive list quotes",
+        data: quotes,
     };
 };
 
@@ -31,11 +35,19 @@ export const getQuote = async (
 
     if (quote.length) {
         response.status = Status.OK;
-        response.body = {data: quote};
+        response.body = {
+            success: true,
+            message: "quote",
+            data: quote,
+        };
         return;
     }
     response.status = Status.BadRequest;
-    response.body = {message: `Quote with id: ${params.id} not found`};
+    response.body = {
+        success: false,
+        message: `Quote with id: ${params.id} not found`,
+        data: [],
+    }
 };
 
 /**
@@ -57,6 +69,7 @@ export const addQuote = async (
             response.status = Status.OK;
             response.body = {
                 success: true,
+                message: "save quote successfull", 
                 data: quote,
             };
             return;
@@ -67,6 +80,7 @@ export const addQuote = async (
     response.body = {
         success: false,
         message: "The request must have the citation and author.",
+        data: [],
     };
 };
 
@@ -103,14 +117,16 @@ export const updateQuote = async (
                 response.body = {
                     success: true,
                     message: `Update for quote with id ${params.id} was successful`,
+                    data: updatedQuote, 
                 };
                 return;
             }
 
             response.status = Status.InternalServerError;
             response.body = {
-                success: true,
+                success: false,
                 message: `Update for quote with id ${params.id} failed`,
+                data: [], 
             };
             return; 
         }
@@ -118,6 +134,7 @@ export const updateQuote = async (
         response.body = {
             success: false,
             message: "The request must have the citation or author.",
+            data: [], 
         };
         return;
     }
@@ -125,6 +142,7 @@ export const updateQuote = async (
     response.body = {
         success: false,
         message: `Quote with id: ${params.id} not found`,
+        data: [], 
     };
 };
 

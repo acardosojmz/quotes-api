@@ -7,8 +7,8 @@ import NotFound from "./middleware/notfound.ts";
 import errorHandler from "./middleware/errorhandler.ts";
 
 const env = Deno.env.toObject()
-const PORT = env.PORT || 3000;
-const HOST = env.HOST || 'localhost';
+const PORT = env.PORT || 8080;
+const HOST = env.HOST || '0.0.0.0';
 
 const app = new Application();
 app.use(errorHandler);
