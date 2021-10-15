@@ -5,7 +5,11 @@ const errorHandler = async (ctx: Context, next: any) => {
     await next();
   } catch (err) {
     ctx.response.status = Status.InternalServerError;
-    ctx.response.body = { message: err.message };
+    ctx.response.body = { 
+        success: false,
+        message: err.message, 
+        data: [], 
+    };
   }
 };
 

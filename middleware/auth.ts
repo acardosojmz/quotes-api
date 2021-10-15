@@ -13,15 +13,27 @@ const authMiddleware = async (ctx: Context, next: any) => {
                 await next();
             } else {
                 ctx.response.status = Status.Unauthorized;
-                ctx.response.body = { message: "Invalid jwt token" };
+                ctx.response.body = { 
+                    success: false,
+                    message: "Invalid jwt token",
+                    data: [],
+                 };
             }   
         } else {
             ctx.response.status = Status.Unauthorized;
-            ctx.response.body = { message: "JWT is necessary" };
+            ctx.response.body = { 
+                success:  false, 
+                message: "JWT is necessary",
+                data: []
+            };
         }      
     } else {
         ctx.response.status = Status.Unauthorized;
-        ctx.response.body = { message: "Header Authorization not present" };
+        ctx.response.body = { 
+            success: false, 
+            message: "Header Authorization not present",
+            data: [], 
+        };
     }    
 };
 

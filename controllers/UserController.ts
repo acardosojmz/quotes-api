@@ -15,8 +15,11 @@ import {
 // @desc    Fetch all users
 // @route   GET /api/v1/users
 export const getUsers = async ({response}: { response: any }) => {
+    const users= await userService.fetchUsers();
     response.body =  {
-        data: await userService.fetchUsers()
+        success: true, 
+        message: "list users", 
+        data: users,
     };
 };
 
@@ -40,6 +43,7 @@ export const loginUser = async (
     
             response.body = {
                 success: true,
+                message: "Authenticate successfull", 
                 data: jwt,
             }
             return;
@@ -48,7 +52,7 @@ export const loginUser = async (
         response.body = {
             success: false,
             message:"Invalid username or password'",
-            data: data
+            data: data, 
         };
         return;
     }
@@ -57,6 +61,7 @@ export const loginUser = async (
     response.body = {
         success: false,
         message: "The request must have a body",
+        data: [], 
     };
 };
 
