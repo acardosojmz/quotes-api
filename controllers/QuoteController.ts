@@ -9,8 +9,17 @@ import { Status } from "../dependences.ts";
  * @returns list quotes
  */
 
-export const getQuotes = async ({response}: { response: any }) => {
-    const quotes= await quoteService.getQuotes();
+export const getQuotes = async ( 
+    {request, response}: { request: any, response: any },
+    ) => {
+
+    const rowsPerPage = 5;
+    const pageParameter =  parseInt(request.url.searchParams.get("page")) || 1;
+    
+    const page = pageParameter<1?1:pageParameter; 
+
+    const quotes= await quoteService.getQuotes(page, rowsPerPage);
+
     response.status = Status.OK;
     response.body = {
         success: true,
@@ -29,9 +38,11 @@ export const getQuotes = async ({response}: { response: any }) => {
 export const getQuote = async (
     {params, response}: { params: { id: string }; response: any },
 ) => {
+
     const quote = await quoteService.getQuote(
         Number(params.id),
     );
+
 
     if (quote.length) {
         response.status = Status.OK;

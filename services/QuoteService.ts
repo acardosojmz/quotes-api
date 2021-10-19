@@ -4,8 +4,8 @@ import { Quote } from "../interfaces/Quote.ts";
 
 class QuoteService {
 
-    getQuotes =  async() => {
-        return await quoteRepository.getQuotes();
+    getQuotes  =  async(page: number, rowsPerPage: number) => {
+        return await quoteRepository.getQuotes(page, rowsPerPage);
     };
 
       

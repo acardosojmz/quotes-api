@@ -3,10 +3,14 @@ import { QuoteModel } from "../models/QuoteModel.ts";
 
 class QuoteRepository { 
 
-    async getQuotes() { 
-        return await QuoteModel.all();
-    }
     
+
+    async getQuotes(page: number, rowsPerPage: number)  { 
+        //const quotes = await QuoteModel.skip((page-1)*rowsPerPage).take(rowsPerPage).get(); 
+        const quotes = await QuoteModel.all();
+        return  quotes;
+    } 
+   
     async getQuoteByoid(oid: string) { 
         return await QuoteModel.find(oid); 
     } 

@@ -38,6 +38,6 @@ class QuoteModel extends Model {
 };
 
 mongoDB.link([QuoteModel]); 
-
+mongoDB.sync();
 export { QuoteModel }; 
 
