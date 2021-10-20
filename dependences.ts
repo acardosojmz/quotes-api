@@ -33,7 +33,7 @@ import {
     Database, 
     Model, 
     MySQLConnector, 
-    MongoDBConnector
+    MongoDBConnector, 
    }  from "https://deno.land/x/denodb/mod.ts";
 
 export const { JWT_SECRET } = config({ safe: true });
@@ -53,5 +53,6 @@ export {
     Database,
     Model, 
     MySQLConnector, 
-    MongoDBConnector 
+    MongoDBConnector, 
 }; 
+

@@ -1,4 +1,5 @@
-import { DataTypes, Database, Model } 
+import { DataTypes, Database, Model, 
+    } 
     from "../dependences.ts";
 
 import { connectorMongoDB } 
@@ -39,5 +40,6 @@ class QuoteModel extends Model {
 
 mongoDB.link([QuoteModel]); 
 mongoDB.sync();
+
 export { QuoteModel }; 
 

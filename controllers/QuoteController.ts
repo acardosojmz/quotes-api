@@ -13,12 +13,14 @@ export const getQuotes = async (
     {request, response}: { request: any, response: any },
     ) => {
 
-    const rowsPerPage = 5;
-    const pageParameter =  parseInt(request.url.searchParams.get("page")) || 1;
-    
-    const page = pageParameter<1?1:pageParameter; 
 
-    const quotes= await quoteService.getQuotes(page, rowsPerPage);
+    const pageParameter =  parseInt(request.url.searchParams.get("page")) || 1;
+    const sizeParameter =  parseInt(request.url.searchParams.get("size")) || 5;
+
+    const page = pageParameter<1?1:pageParameter; 
+    const size = sizeParameter<5?5:sizeParameter; 
+
+    const quotes= await quoteService.getQuotes(page, size);
 
     response.status = Status.OK;
     response.body = {
