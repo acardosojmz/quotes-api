@@ -6,7 +6,7 @@ export const connectorMariaDB = new MySQLConnector({
     host: 'localhost',
     username: 'devDeno',
     password: 't0ps3cr3t',
-    port: 3360, 
+    port: 3307, 
 });
 
 export  const connectorMongoDB = new MongoDBConnector({

@@ -31,8 +31,9 @@ export const loginUser = async (
 ) => {
 
     if (request.body()){
+        
         const data = await request.body().value;
-    
+        
         const isLoginUser = await userService.isLoginUser(
             data.account, data.password);
         
@@ -51,8 +52,8 @@ export const loginUser = async (
         response.status = Status.UnprocessableEntity;
         response.body = {
             success: false,
-            message:"Invalid username or password'",
-            data: data, 
+            message:"Invalid username or password!",
+            data: "", 
         };
         return;
     }
@@ -61,7 +62,7 @@ export const loginUser = async (
     response.body = {
         success: false,
         message: "The request must have a body",
-        data: [], 
+        data: "", 
     };
 };
 

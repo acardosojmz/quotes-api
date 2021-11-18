@@ -36,7 +36,7 @@ class QuoteModel extends Model {
     quote!: string; 
     author!: string; 
 
-};
+}
 
 mongoDB.link([QuoteModel]); 
 mongoDB.sync();
