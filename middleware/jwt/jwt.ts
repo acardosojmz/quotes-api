@@ -16,8 +16,8 @@ const  payload = (name:string) => {
         sub: 'cardoso.developer',
         //--- Identifica la audiencia o receptores para lo que el JWT fue emitido, normalmente el/los servidor/es de recursos (e.g. la API protegida)
         aud: 'api-quotes',
-        //--- expiración del token (One hour from now)
-        exp: getNumericDate(60 * 60),
+        //--- expiración del token (24 hour from now) 
+        exp: getNumericDate(60 * 60 * 24),
         //--- Identifica la marca temporal en qué el JWT fue emitido 
         iat: getNumericDate(new Date()),
         //--- a partir de cuando es válido
