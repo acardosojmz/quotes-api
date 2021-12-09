@@ -45,13 +45,14 @@ export const getQuote = async (
         Number(params.id),
     );
 
-
+    //console.log(quote.toString);
+    
     if (quote.length) {
         response.status = Status.OK;
         response.body = {
             success: true,
             message: "quote",
-            data: quote,
+            data: [quote],
         };
         return;
     }
@@ -83,7 +84,7 @@ export const addQuote = async (
             response.body = {
                 success: true,
                 message: "save quote successfull", 
-                data: quote,
+                data: [quote],
             };
             return;
         }
