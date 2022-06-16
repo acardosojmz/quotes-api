@@ -1,5 +1,6 @@
-  
+ 
 import { Application } from "./dependences.ts";
+
 import routerQuotes from "./routes/quotes.ts";
 import routerUsers from "./routes/users.ts";
 
@@ -15,6 +16,8 @@ const HOST = env.HOST || '0.0.0.0';
 const app = new Application();
 
 app.use(errorHandler);
+
+
 //--- Quotes
 app.use(routerQuotes.routes());
 app.use(routerQuotes.allowedMethods());

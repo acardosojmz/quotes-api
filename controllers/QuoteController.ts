@@ -15,7 +15,7 @@ export const getQuotes = async (
 
 
     const pageParameter =  parseInt(request.url.searchParams.get("page")) || 1;
-    const sizeParameter =  parseInt(request.url.searchParams.get("size")) || 5;
+    const sizeParameter =  parseInt(request.url.searchParams.get("size")) || 50;
 
     const page = pageParameter<1?1:pageParameter; 
     const size = sizeParameter<5?5:sizeParameter; 
@@ -80,7 +80,7 @@ export const addQuote = async (
         if (data.quote && data.author){
             const quote = await quoteService.createQuote( data );
 
-            response.status = Status.OK;
+            response.status = Status.Created;
             response.body = {
                 success: true,
                 message: "save quote successfull", 
@@ -179,7 +179,7 @@ export const deleteQuote = async (
     response.body = {
         success: quote.length !== 0,
         message: message,
-        data: quote,
+        data: [quote],
     };
     
 };

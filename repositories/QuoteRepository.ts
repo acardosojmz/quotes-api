@@ -7,7 +7,7 @@ class QuoteRepository {
         //--- paginate
         const quotes = await QuoteModel.skip((page-1) * size)
                         .take(page*size).get();
-        return  quotes;
+        return  quotes; 
     } 
    
     async getQuoteByoid(oid: string) { 
