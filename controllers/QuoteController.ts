@@ -52,7 +52,7 @@ export const getQuote = async (
         response.body = {
             success: true,
             message: "quote",
-            data: [quote],
+            data: quote,
         };
         return;
     }
@@ -179,7 +179,7 @@ export const deleteQuote = async (
     response.body = {
         success: quote.length !== 0,
         message: message,
-        data: [quote],
+        data: quote,
     };
     
 };
